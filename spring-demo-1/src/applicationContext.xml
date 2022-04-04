@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	 
+	 <bean id="myLoggerConfig" class="com.spring.coach.MyLoggerConfig" init-method="initLogger">
+    	<property name="rootLoggerLevel" value="FINE" />
+    	<property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+    <!-- A Dependent Class -->
+    <bean id = "fortuneService"
+    	class = "com.spring.coach.RandomFortunes">
+    </bean>
+    <!-- Constructor Injection -->
+    <bean id = "myCoach"
+    	class = "com.spring.coach.eSportsCoach">
+    	<constructor-arg ref = "fortuneService" />
+    </bean>
+    <!-- Setter Injection -->
+    <bean id = "myCricketCoach"
+    		class = "com.spring.coach.cricketCoach">
+    		<property name = "FortuneService" ref = "fortuneService"/>
+    </bean>
+    
+</beans>
